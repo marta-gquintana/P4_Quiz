@@ -25,7 +25,7 @@ exports.helpCmd = rl => {
     log("credits - Créditos");
     log("q|quit - Sale del programa.");
     rl.prompt();
-}
+};
 
 /**
  * Lista todos los quizzes existentes en el modelo
@@ -168,34 +168,33 @@ exports.testCmd = (rl,id) => {
 exports.playCmd = rl => {
     let score = 0;
     let toBeResolved = [model.count()]; //Array preguntas por contestar (guarda los id)
-    for (i=0; i<toBeResolved.length; i++) {
+    for (i=0; i<toBeResolved.length -1; i++) {
         toBeResolved[i]=i;
     }
     const playOne = () => {
         if (toBeResolved.length === 0) {
             log(`Fin del juego. Aciertos: ` + score);
-            biglog(score, 'purple');
+            biglog(score, 'red');
             rl.prompt();
         } else {
-            let id = Math.random() * toBeResolved.length; //quitarla del array
+            let id = Math.floor(Math.random()*(toBeResolved.length));
+            toBeResolved.splice(id,1);
             let quiz = model.getByIndex(id);
-
-
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
                 if (resp === quiz.answer) {
                     score++;
-                    log(`Llevas:` + score + `aciertos`);
+                    log(`Llevas: ` + score + ` aciertos`);
                     //bucle con funcion
                     playOne();
                 } else {
-                    log(`Fin del examen. Aciertos:`);
-                    biglog(score, 'purple');
+                    log(`Fin del examen. Aciertos: `+ score);
+                    biglog(score, 'red');
                     rl.prompt();
 
                 }
             });
         }
-    }
+    };
     playOne();
 };
 
