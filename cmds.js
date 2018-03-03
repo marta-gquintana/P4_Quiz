@@ -180,8 +180,9 @@ exports.playCmd = rl => {
             rl.prompt();
         } else {
             let id = Math.floor(Math.random()*(toBeResolved.length));
+            id2 = toBeResolved[id];
             toBeResolved.splice(id,1);
-            let quiz = model.getByIndex(id);
+            let quiz = model.getByIndex(id2);
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
                 if (resp.toUpperCase() === quiz.answer.toUpperCase()) {
                     score++;
