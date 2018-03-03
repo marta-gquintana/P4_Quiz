@@ -206,7 +206,7 @@ exports.playCmd = rl => {
  */
 exports.creditsCmd = rl => {
     log("Autores de la práctica:");
-    log("Marta Galindo Quintana",'green');
+    log("MARTA",'green');
     rl.prompt();
 };
 
