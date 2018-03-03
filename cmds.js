@@ -142,7 +142,7 @@ exports.testCmd = (rl,id) => {
         try {
             const quiz = model.getByIndex(id);
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
-                if (resp === quiz.answer){
+                if (resp.toUpperCase() === quiz.answer.toUpperCase()){
                     log(`Su respuesta es correcta`);
                     biglog('Correcta', 'green');
                     rl.prompt();
@@ -183,7 +183,7 @@ exports.playCmd = rl => {
             toBeResolved.splice(id,1);
             let quiz = model.getByIndex(id);
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
-                if (resp === quiz.answer) {
+                if (resp.toUpperCase() === quiz.answer.toUpperCase()) {
                     score++;
                     log(`CORRECTO - Lleva: ` + score + ` aciertos`);
                     playOne();
