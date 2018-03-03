@@ -143,10 +143,12 @@ exports.testCmd = (rl,id) => {
             const quiz = model.getByIndex(id);
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
                 if (resp === quiz.answer){
-                    biglog('Correcto', 'green');
+                    log(`Su respuesta es correcta`);
+                    biglog('Correcta', 'green');
                     rl.prompt();
                 } else {
-                    biglog('Incorrecto', 'red');
+                    log(`Su respuesta es incorrecta`);
+                    biglog('Incorrecta', 'red');
                     rl.prompt();
                 }
             });
@@ -183,10 +185,11 @@ exports.playCmd = rl => {
             rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
                 if (resp === quiz.answer) {
                     score++;
-                    log(`Llevas: ` + score + ` aciertos`);
+                    log(`CORRECTO - Lleva: ` + score + ` aciertos`);
                     playOne();
                 } else {
-                    log(`Fin del examen. Aciertos: `+ score);
+                    log(`INCORRECTO`);
+                    log(`Fin del juego. Aciertos: `+ score);
                     biglog(score, 'red');
                     rl.prompt();
 
