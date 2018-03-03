@@ -167,8 +167,8 @@ exports.testCmd = (rl,id) => {
  */
 exports.playCmd = rl => {
     let score = 0;
-    let toBeResolved = [model.count()]; //Array preguntas por contestar (guarda los id)
-    for (i=0; i<toBeResolved.length -1; i++) {
+    let toBeResolved = new Array();
+    for (i=0; i<model.count(); i++) {
         toBeResolved[i]=i;
     }
     const playOne = () => {
@@ -184,7 +184,6 @@ exports.playCmd = rl => {
                 if (resp === quiz.answer) {
                     score++;
                     log(`Llevas: ` + score + ` aciertos`);
-                    //bucle con funcion
                     playOne();
                 } else {
                     log(`Fin del examen. Aciertos: `+ score);
