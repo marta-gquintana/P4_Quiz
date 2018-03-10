@@ -216,31 +216,33 @@ exports.editCmd = (rl,id) => {
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.testCmd = (rl,id) => {
-    if (typeof id === "undefined") {
-        errorlog(`Falta el parámetro id`);
-        rl.prompt();
-    } else {
-        try {
-            const quiz = model.getByIndex(id);
-            rl.question(colorize(quiz.question + '? ', 'magenta'), resp => {
-                if (resp.toUpperCase().trim() === quiz.answer.toUpperCase().trim()){
-                    log(`Su respuesta es correcta`);
-                    biglog('Correcta', 'green');
-                    rl.prompt();
-                } else {
-                    log(`Su respuesta es incorrecta`);
-                    biglog('Incorrecta', 'red');
-                    rl.prompt();
-                }
-            });
+    validateId(id)
+        .then(id => models.quiz.findById(id))
+        .then(quiz => {
+            if (!quiz) {
+                throw new Error(`No existe un quiz asociado al id=${id}.`);
+            }
+            log(` [${colorize(quiz.id, 'magenta')}]: ${quiz.question}`);
+            return makeQuestion(rl, quiz.question +'? ')
+                .then(a => {
+                    if(quiz.answer.toUpperCase() === a.toUpperCase().trim()){
+                        log("Su respuesta es correcta");
+                        biglog('Correcta', 'green');
+                    } else{
+                        log("Su respuesta es incorrecta");
+                        biglog('Incorrecta', 'red');
+                    }
+                });
 
-
-        } catch (error) {
+        })
+        .catch(error => {
             errorlog(error.message);
+        })
+        .then(() => {
             rl.prompt();
-        }
-    }
+        });
 };
+
 
 /**
  *Pregunta todos los quizzes existentes en el modelo en orden aleatorio
