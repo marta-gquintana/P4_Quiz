@@ -266,12 +266,13 @@ exports.playCmd = (rl) => {
 
             makeQuestion(rl, quiz.question + '? ')
                 .then(answer => {
-                    if (answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()) {
+                    if (answer.toUpperCase().trim() === quiz.answer.toUpperCase().trim()) {
                         score++;
                         console.log('CORRECTO - Lleva ', score, ' aciertos');
                         resolve(playOne());
                     } else {
-                        console.log("INCORRECTO.\nFin del examen. Aciertos:");
+                        console.log('INCORRECTO');
+                        console.log('Fin del juego. Aciertos: '+ score);
                         resolve();
                     }
                 })
