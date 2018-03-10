@@ -253,22 +253,22 @@ exports.playCmd = (rl) => {
     let toBeResolved = [];
 
     const playOne = () => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
 
-            if(toBeResolved.length <=0){
+            if (toBeResolved.length <= 0) {
                 console.log("No hay nada mas que preguntar.\nFin del examen. Aciertos:");
                 resolve();
                 return;
             }
-            let pos = Math.floor(Math.random()*toBeResolved.length);
+            let pos = Math.floor(Math.random() * toBeResolved.length);
             let quiz = toBeResolved[pos];
-            toBeResolved.splice(pos,1);
+            toBeResolved.splice(pos, 1);
 
-            makeQuestion(rl, quiz.question)
+            makeQuestion(rl, quiz.question + '? ')
                 .then(answer => {
-                    if(answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
+                    if (answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()) {
                         score++;
-                        console.log("CORRECTO - Lleva ',score, 'aciertos");
+                        console.log('CORRECTO - Lleva ', score, ' aciertos');
                         resolve(playOne());
                     } else {
                         console.log("INCORRECTO.\nFin del examen. Aciertos:");
@@ -277,6 +277,22 @@ exports.playCmd = (rl) => {
                 })
         })
     }
+    models.quiz.findAll({raw: true})
+        .then(quizzes => {
+            toBeResolved = quizzes;
+        })
+        .then(() => {
+            return playOne();
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        .then(() => {
+            biglog(score,'magenta');
+            rl.prompt();
+        })
+};
+
 
 /**
  *Muestra los nombres de los autores de la práctica
