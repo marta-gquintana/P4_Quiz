@@ -222,7 +222,7 @@ exports.testCmd = (rl,id) => {
             if (!quiz) {
                 throw new Error(`No existe un quiz asociado al id=${id}.`);
             }
-            log(` [${colorize(quiz.id, 'magenta')}]: ${quiz.question}`);
+          //  log(` [${colorize(quiz.id, 'magenta')}]: ${quiz.question}`);
             return makeQuestion(rl, quiz.question +'? ')
                 .then(a => {
                     if(quiz.answer.toUpperCase() === a.toUpperCase().trim()){
