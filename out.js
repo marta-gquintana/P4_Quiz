@@ -22,6 +22,7 @@ const colorize = (msg, color) => {
 /**
  * Escribe un mensaje de log
  *
+ * @param socket
  * @param msg El String a escribir
  * @param color Color del texto
  */
@@ -32,6 +33,7 @@ const log = (socket, msg, color) => {
 /**
  * Escribe un mensaje de log grande
  *
+ * @param socket
  * @param msg Texto a escribir
  * @param color Color del texto
  */
@@ -42,6 +44,7 @@ const biglog = (socket, msg, color) => {
 /**
  * Escribe un mensaje de error emsg
  *
+ * @param socket
  * @param emsg Texto del mensaje de error
  */
 const errorlog = (socket, emsg) => {

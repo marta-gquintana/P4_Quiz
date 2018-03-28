@@ -7,10 +7,10 @@ const {log, biglog, errorlog, colorize} = require("./out");
 const {models} = require('./model');
 
 
-
 /**
  * Muestra la ayuda
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.helpCmd = (socket, rl) => {
@@ -31,6 +31,7 @@ exports.helpCmd = (socket, rl) => {
 /**
  * Lista todos los quizzes existentes en el modelo
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.listCmd = (socket, rl) => {
@@ -75,6 +76,7 @@ const validateId = id => {
 /**
  * Muestra el quiz indicado en el parámetro: la pregunta y la respuesta
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  * @param id Clave del quiz a mostrar
  */
@@ -121,6 +123,7 @@ const makeQuestion = (rl, text) => {
  * es decir, la llamada a rl.prompt() se debe hacer en la callback de la segunda
  * llamada a rl.question.
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.addCmd = (socket, rl) => {
@@ -152,6 +155,7 @@ exports.addCmd = (socket, rl) => {
 /**
  *Borra un quiz del modelo
  *
+ * @param socket
  * @param id Clave del quiz a borrar en el modelo
  * @param rl Objeto readline usado para implementar el CLI
  */
@@ -248,6 +252,7 @@ exports.testCmd = (socket, rl,id) => {
  *Pregunta todos los quizzes existentes en el modelo en orden aleatorio
  * Se gana si se contesta a todos satisfactoriamente
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.playCmd = (socket, rl) => {
@@ -300,6 +305,7 @@ exports.playCmd = (socket, rl) => {
 /**
  *Muestra los nombres de los autores de la práctica
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.creditsCmd = (socket, rl) => {
@@ -311,6 +317,7 @@ exports.creditsCmd = (socket, rl) => {
 /**
  *Terminar el programa
  *
+ * @param socket
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.quitCmd = (socket, rl) => {
