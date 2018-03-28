@@ -173,6 +173,7 @@ exports.deleteCmd = (socket, rl,id) => {
 /**
  *Edita un quiz del modelo
  *
+ * @param socket
  * @param id Clave del quiz a editar en el modelo
  * @param rl Objeto readline usado para implementar el CLI
  */
@@ -216,6 +217,7 @@ exports.editCmd = (socket, rl,id) => {
 /**
  *Prueba un quiz; es decir, hace una pregunta del modelo a la que debemos contestar
  *
+ * @param socket
  * @param id Clave del quiz a probar
  * @param rl Objeto readline usado para implementar el CLI
  */
@@ -275,11 +277,11 @@ exports.playCmd = (socket, rl) => {
                 .then(answer => {
                     if (answer.toUpperCase().trim() === quiz.answer.toUpperCase().trim()) {
                         score++;
-                        log(socket, 'CORRECTO - Lleva ', score, ' aciertos');
+                        log(socket, `CORRECTO - Lleva  ${score}  aciertos`);
                         resolve(playOne());
                     } else {
                         log(socket, 'INCORRECTO');
-                        log(socket, 'Fin del juego. Aciertos: '+ score);
+                        log(socket, `Fin del juego. Aciertos:  ${score}`);
                         resolve();
                     }
                 })
